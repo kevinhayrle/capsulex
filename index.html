@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CapsuleX Intro</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="intro-page">
+  <video id="introVideo" autoplay muted playsinline>
+    <source src="CapsuleX_intro.mp4" type="video/mp4" />
+    Your browser does not support the video tag.
+  </video>
+
+  <script>
+    const video = document.getElementById('introVideo');
+
+    // When the video ends, go to login.html
+    video.addEventListener('ended', () => {
+      sessionStorage.setItem('videoPlayed', 'true'); // so login page knows user watched it
+      window.location.href = 'login.html';
+    });
+
+    // Restart video cleanly if user refreshes on index
+    window.addEventListener('DOMContentLoaded', () => {
+      video.currentTime = 0;
+      video.play();
+    });
+  </script>
+</body>
+</html>

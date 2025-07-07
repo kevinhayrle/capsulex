@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CapsuleX - Sign Up</title>
+  <link rel="stylesheet" href="style.css" />
+  <script>
+    window.addEventListener('beforeunload', () => {
+      sessionStorage.removeItem('videoPlayed');
+    });
+  </script>
+</head>
+<body>
+  <div class="caption1">Hey Stalker!</div>
+  <div class="caption2">Say it without saying who you are.</div>
+  <div class="logo">capsule<span class="grey-x">X</span></div>
+
+  <input type="text" placeholder="Name" />
+  <input type="email" placeholder="Email address" />
+  <input type="password" placeholder="Password" />
+
+  <!-- Button updated to Sign Up -->
+  <button>Sign Up</button>
+
+  <!-- Text under the form -->
+  <div class="or-text">OR</div>
+  <a href="login.html" class="signup-link">log in</a>
+</body>
+</html>
