@@ -50,7 +50,6 @@
         alert("Login successful!");
         window.location.href = "dashboard.html"; // Replace with real dashboard when ready
       } else {
-        const result = await response.json();
         alert(result.message || "Login failed.");
       }
     });
