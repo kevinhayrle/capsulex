@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>About - CapsuleX</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="dashboard-page">
+  <!-- Splash -->
+  <div id="splashScreen">
+    <div class="grey-x splash-x">X</div>
+    <div class="capsule-loading">Your capsule is loading...</div>
+  </div>
+
+  <!-- Main Content -->
+  <div id="mainAbout" style="display: none;">
+    <!-- Header -->
+    <div class="dashboard-header">
+      <img src="logo.png" class="dashboard-logo" alt="Logo" onclick="window.location.href='dashboard.html'" />
+      <div class="dashboard-title">capsule<span class="grey-x">X</span></div>
+      <div class="hamburger" onclick="toggleDrawer()">&#9776;</div>
+      <div id="drawerOverlay" class="drawer-overlay" onclick="toggleDrawer()"></div>
+
+      <div id="sidePanel" class="side-panel">
+        <div class="drawer-item" onclick="window.location.href='dashboard.html'">Home</div>
+        <div class="drawer-item" onclick="window.location.href='about.html'">About Us</div>
+        <div class="drawer-item" onclick="logout()">Log out</div>
+        <div class="version">X version 1.0</div>
+      </div>
+    </div>
+
+    <!-- About Content -->
+    <div class="dashboard-content about-container">
+      <div class="caption1 about-title">About capsuleX</div>
+
+      <div class="about-text">
+        CapsuleX is a safe space for sending anonymous messages to people you care about. A place to express what words often leave unsaid.
+        Whether it’s love, appreciation, a thank you, or something you’ve always wanted to share — CapsuleX delivers it anonymously and sincerely.
+        We never store your message contents. Just the act of expression, nothing else.<br>
+        <span class="italic-muted">Stay curious. Stay kind.</span>
+      </div>
+
+      <!-- About Me Section -->
+      <div class="about-me-section">
+        <h2 class="about-me-heading">About the Developer</h2>
+
+        <p class="about-paragraph">
+          Kevin Antony — developer, designer, and poet (formally known as Kevin Hayrle). As he stepped into his second-year of a Bachelor’s degree in Computer Science, Kevin built <strong>CapsuleX</strong> as his first full-stack web application — a fun project that became something more. He grew up watching how hard it is for people to confess their feelings, say what they really mean, or open up honestly. That emotional weight stayed with him.
+        </p>
+
+        <p class="about-quote">
+          So he created a space for it.<br>
+          A place to write without fear.<br>
+          To send without being seen.<br>
+          To say what’s been unsaid.
+        </p>
+
+        <div class="capsule-tagline">
+          Write it. Capsule it. <span class="grey-x">X</span> sends it.
+        </div>
+      </div>
+
+      <img src="kev.png" alt="My Photo" class="about-photo" />
+      <p class="about-role">Founder and Developer of CapsuleX</p>
+
+      <img src="logo.PNG" alt="CapsuleX Logo" class="about-logo" />
+      <p class="about-credit">CapsuleX Logo design by Nishanth Antony</p>
+
+      <hr class="about-divider" />
+
+      <p class="copyright">
+        © 2025 CapsuleX. All rights reserved.<br>
+        CapsuleX name, logo, and associated visual elements are protected by copyright law.<br>
+        This web application, including its design, frontend, backend, and architecture, was entirely developed by Kevin Antony.<br>
+        Unauthorized use, reproduction, or distribution of any part of this application is strictly prohibited.<br>
+        Logo design © 2025 by Nishanth Antony.<br>
+        First version officially released on July 8, 2025.<br>
+        This service is provided for emotional expression and personal messaging. We do not track, store, or share your data.
+      </p>
+    </div>
+  </div>
+
+  <script>
+    window.addEventListener("DOMContentLoaded", () => {
+      setTimeout(() => {
+        document.getElementById("splashScreen").style.display = "none";
+        document.getElementById("mainAbout").style.display = "block";
+      }, 2000);
+    });
+
+    function toggleDrawer() {
+      document.getElementById("sidePanel").classList.toggle("open");
+      document.getElementById("drawerOverlay").classList.toggle("show");
+    }
+
+    function logout() {
+      localStorage.removeItem("token");
+      localStorage.removeItem("name");
+      window.location.href = "login.html";
+    }
+  </script>
+</body>
+</html>

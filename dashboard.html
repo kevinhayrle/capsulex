@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CapsuleX - Dashboard</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="dashboard-page">
+
+  <!-- Splash Screen -->
+  <div id="splashScreen">
+    <div class="grey-x splash-x">X</div>
+    <div class="capsule-loading">Your capsule is loading...</div>
+  </div>
+
+  <!-- Dashboard -->
+  <div id="mainDashboard" style="display: none;">
+
+    <!-- Header -->
+     <a href="dashboard.html">
+    <div class="dashboard-header">
+      <img src="logo.png" class="dashboard-logo" alt="Logo" />
+    </a>
+      <div class="dashboard-title">capsule<span class="grey-x">X</span></div>
+     <div class="hamburger" onclick="toggleDrawer()">&#9776;</div>
+
+<div id="drawerOverlay" class="drawer-overlay" onclick="toggleDrawer()"></div>
+
+<div id="sidePanel" class="side-panel">
+  <div class="drawer-item" onclick="window.location.href='dashboard.html'">Home</div>
+  <div class="drawer-item" onclick="window.location.href='about.html'">About Us</div>
+  <div class="drawer-item" onclick="logout()">Log out</div>
+  <div class="version">X version 1.0</div>
+</div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="dashboard-content">
+      <div class="caption1" id="welcomeText">Welcome, User</div>
+      <div class="grey-x send-link" onclick="window.location.href='send.html'">Send new message</div>
+      <hr class="divider" />
+      <div class="message-box">
+  <div class="caption2">message history</div>
+  <div id="messageHistory" class="history-container">No messages sent yet.</div>
+</div>
+    </div>
+
+  </div>
+
+  <script src="dashboard.js"></script>
+  <script>
+  window.addEventListener("DOMContentLoaded", () => {
+    // Splash screen: hide after 1s
+    setTimeout(() => {
+      document.getElementById("splashScreen").style.display = "none";
+      document.getElementById("mainDashboard").style.display = "block";
+    }, 1000);
+
+    // Update welcome text
+    const name = localStorage.getItem("name") || "User";
+    document.getElementById("welcomeText").innerText = `Welcome, ${name}`;
+  });
+  
+function toggleDrawer() {
+  document.getElementById("sidePanel").classList.toggle("open");
+  document.getElementById("drawerOverlay").classList.toggle("show");
+}
+
+function logout() {
+  localStorage.removeItem("token");
+  localStorage.removeItem("name");
+  window.location.href = "login.html";
+}
+
+</script>
+</body>
+</html>

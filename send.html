@@ -1,0 +1,233 @@
+<!DOCTYPE html> 
+
+<html lang="en"> 
+
+<head> 
+
+  <meta charset="UTF-8" /> 
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/> 
+
+  <title>CapsuleX - Send Message</title> 
+
+  <link rel="stylesheet" href="style.css" /> 
+
+</head> 
+
+<body class="dashboard-page"> 
+
+  <!-- Splash Screen --> 
+
+  <div id="splashScreen"> 
+
+    <div class="grey-x splash-x">X</div> 
+
+    <div class="capsule-loading">Your capsule is loading...</div> 
+
+  </div> 
+
+ 
+
+  <!-- Main Container --> 
+
+  <div id="mainSendPage" style="display: none;"> 
+
+ 
+
+    <!-- Header --> 
+
+    <div class="dashboard-header"> 
+
+      <img src="logo.png" class="dashboard-logo" alt="Logo" onclick="window.location.href='dashboard.html'" /> 
+
+      <div class="dashboard-title">capsule<span class="grey-x">X</span></div> 
+
+      <div class="hamburger" onclick="toggleDrawer()">&#9776;</div> 
+
+      <div id="drawerOverlay" class="drawer-overlay" onclick="toggleDrawer()"></div> 
+
+ 
+
+      <div id="sidePanel" class="side-panel"> 
+
+        <div class="drawer-item" onclick="window.location.href='dashboard.html'">Home</div> 
+
+        <div class="drawer-item" onclick="window.location.href='about.html'">About Us</div>
+
+        <div class="drawer-item" onclick="logout()">Log out</div> 
+
+        <div class="version">X version 1.0</div> 
+
+      </div> 
+
+    </div> 
+
+ 
+
+    <!-- Message Form --> 
+
+    <div class="dashboard-content"> 
+
+      <div class="caption1">Send a message</div> 
+
+      <div class="message-box"> 
+
+        <input type="text" id="recipient" placeholder="Recipient email" /> 
+
+        <textarea id="message" rows="5" placeholder="Write your anonymous message..."></textarea> 
+
+        <button id="sendButton">Send Message</button> 
+
+        <div id="statusMsg" style="margin-top: 10px; font-size: 14px;"></div> 
+
+      </div> 
+
+    </div> 
+
+ 
+
+  </div> 
+
+ 
+
+  <script> 
+
+    // Splash logic 
+
+    window.addEventListener("DOMContentLoaded", () => { 
+
+      setTimeout(() => { 
+
+        document.getElementById("splashScreen").style.display = "none"; 
+
+        document.getElementById("mainSendPage").style.display = "block"; 
+
+      }, 1000); 
+
+    }); 
+
+ 
+
+    function toggleDrawer() { 
+
+      document.getElementById("sidePanel").classList.toggle("open"); 
+
+      document.getElementById("drawerOverlay").classList.toggle("show"); 
+
+    } 
+
+ 
+
+    function logout() { 
+
+      localStorage.removeItem("token"); 
+
+      localStorage.removeItem("name"); 
+
+      window.location.href = "login.html"; 
+
+    } 
+
+ 
+
+    // Send message logic 
+
+    document.getElementById("sendButton").addEventListener("click", async () => { 
+
+      const recipient = document.getElementById("recipient").value.trim(); 
+
+      const message = document.getElementById("message").value.trim(); 
+
+      const statusMsg = document.getElementById("statusMsg"); 
+
+      const token = localStorage.getItem("token"); 
+
+ 
+
+      if (!recipient || !message) { 
+
+        statusMsg.textContent = "Please fill in both fields."; 
+
+        statusMsg.style.color = "orange"; 
+
+        return; 
+
+      } 
+
+ 
+
+      try { 
+
+  const res = await fetch("https://capsule-x-backend.onrender.com/api/message/send", { 
+
+    method: "POST", 
+
+    headers: { 
+
+      "Content-Type": "application/json", 
+
+      Authorization: `Bearer ${token}` 
+
+    }, 
+
+    body: JSON.stringify({ recipient_email: recipient, message_body: message }) 
+
+  }); 
+
+ 
+
+  let data; 
+
+  try { 
+
+    data = await res.json(); 
+
+  } catch (e) { 
+
+    statusMsg.textContent = "❌ Unexpected response. Try again."; 
+
+    statusMsg.style.color = "red"; 
+
+    return; 
+
+  } 
+
+ 
+
+  if (res.ok) { 
+
+    statusMsg.textContent = "✅ Your message has been sent!"; 
+
+    statusMsg.style.color = "lightgreen"; 
+
+    document.getElementById("recipient").value = ""; 
+
+    document.getElementById("message").value = ""; 
+
+  } else { 
+
+    statusMsg.textContent = data.error || "❌ Failed to send message."; 
+
+    statusMsg.style.color = "red"; 
+
+  } 
+
+ 
+
+} catch (error) { 
+
+  console.error("Error:", error); 
+
+  statusMsg.textContent = "❌ Network error. Try again."; 
+
+  statusMsg.style.color = "red"; 
+
+} 
+
+    }); 
+
+  </script> 
+
+</body> 
+
+</html> 

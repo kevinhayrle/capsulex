@@ -1,4 +1,4 @@
-/* INTRO PAGE VIDEO STYLING */
+/* ------------------ INTRO PAGE VIDEO STYLING ------------------ */
 body.intro-page {
   margin: 0;
   background-color: black;
@@ -14,24 +14,18 @@ body.intro-page {
   object-fit: contain;
 }
 
-
-/* LOGIN PAGE & SIGN UP PAGE*/
-/* (custom fonts) */
+/* ------------------ CUSTOM FONTS ------------------ */
 @font-face {
   font-family: 'Ibrands';
   src: url('ibrands-ligature.otf') format('opentype');
-  font-weight: normal;
-  font-style: normal;
 }
 @font-face {
   font-family: 'Cal';
   src: url('CalSans-SemiBold 2.otf') format('opentype');
-  font-weight: normal;
-  font-style: normal;
 }
 
-/* LOGIN & SIGN UP PAGE BODY */
-body:not(.intro-page) {
+/* ------------------ LOGIN / SIGNUP PAGE ------------------ */
+body:not(.intro-page):not(.dashboard-page) {
   margin: 0;
   padding: 0;
   font-family: 'Segoe UI', sans-serif;
@@ -44,33 +38,33 @@ body:not(.intro-page) {
   height: 100vh;
 }
 
-/* CAPTIONS ABOVE THE LOGO*/
-.caption1 {
+.caption1, .caption2 {
   font-family: 'Cal';
-font-size: 20px;
-text-align: center;
+  font-size: 20px;
+  text-align: center;
 }
 .caption2 {
-  font-family: 'Cal';
-font-size: 20px;
-margin-bottom: 10px;
-text-align: center;
-color:#888888
+  margin-bottom: 10px;
+  color: #888;
 }
-
-/* LOGO */
-.logo {
+@font-face {
+  font-family: 'Ibrands';
+  src: url('ibrands-ligature.otf') format('opentype');
+}
+.intro-logo {
   font-family: 'Ibrands';
   font-size: 40px;
   margin-bottom: 15px;
   color: white;
 }
+
 .grey-x {
-  color: #888888;
+  color: #888;
+  position: relative;
+  top: 0.9px;
+}
 
-} 
-
-/* INPUT BOXES */ 
+/* Inputs & Button */
 input[type="text"],
 input[type="email"],
 input[type="password"] {
@@ -84,11 +78,10 @@ input[type="password"] {
   font-size: 15px;
 }
 
-/* LOGIN BUTTON */
 button {
   width: 160px;
   padding: 12px;
-  background-color: #888888;
+  background-color: #888;
   color: white;
   border: none;
   border-radius: 6px;
@@ -100,14 +93,12 @@ button:hover {
   background-color: #1a23c5;
 }
 
-/* OR */
 .or-text {
   margin: 15px 0 5px;
   font-size: 13px;
   color: #aaa;
 }
 
-/* SIGN UP LINK */
 .signup-link {
   color: #ccc;
   text-decoration: none;
@@ -117,103 +108,436 @@ button:hover {
 .signup-link:hover {
   text-decoration: underline;
 }
+
 .container {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-/* FADE-IN ANIMATION */
+/* Animations */
 @keyframes fadeIn {
-  0% {
-    opacity: 0;
-    transform: translateY(-10px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  0% { opacity: 0; transform: translateY(-10px); }
+  100% { opacity: 1; transform: translateY(0); }
 }
-.caption1, .caption2, .logo, .grey-x {
-  opacity: 0; /* Start hidden */
-  animation: fadeIn 1s ease forwards;
-}
-.caption1 {
-  animation-delay: 0.5s;
-}
-
-.caption2 {
-  animation-delay: 0.5s;
-}
-
-.logo {
-  animation-delay: 1s;
-}
-
-.grey-x {
-  animation-delay: 2s;
-}
-
-/* ANIMATIONS */
 @keyframes slideInLeft {
   from { opacity: 0; transform: translateX(-30px); }
   to   { opacity: 1; transform: translateX(0); }
 }
-
 @keyframes slideInRight {
   from { opacity: 0; transform: translateX(30px); }
   to   { opacity: 1; transform: translateX(0); }
 }
-
 @keyframes popIn {
-  0%   { opacity: 0; transform: scale(0.8); }
+  0% { opacity: 0; transform: scale(0.8); }
   100% { opacity: 1; transform: scale(1); }
 }
-
 @keyframes fadeBounce {
-  0%   { opacity: 0; transform: translateY(10px); }
-  60%  { opacity: 1; transform: translateY(-3px); }
+  0% { opacity: 0; transform: translateY(10px); }
+  60% { opacity: 1; transform: translateY(-3px); }
   100% { opacity: 1; transform: translateY(0); }
 }
-
 @keyframes slideUpFade {
   from { opacity: 0; transform: translateY(20px); }
   to   { opacity: 1; transform: translateY(0); }
 }
+
+.caption1, .caption2, .intro-logo, .grey-x {
+  opacity: 0;
+  animation: fadeIn 1s ease forwards;
+}
+.caption1 { animation-delay: 0.5s; }
+.caption2 { animation-delay: 0.5s; }
+.intro-logo { animation-delay: 1s; }
+.grey-x { animation-delay: 2s; }
 
 input[type="text"] {
   animation: slideInRight 0.6s ease forwards;
   animation-delay: 1.2s;
   opacity: 0;
 }
-
 input[type="email"] {
   animation: slideInLeft 0.6s ease forwards;
   animation-delay: 1.2s;
   opacity: 0;
 }
-
 input[type="password"] {
   animation: slideInRight 0.6s ease forwards;
   animation-delay: 1.4s;
   opacity: 0;
 }
-
 button {
   animation: popIn 0.4s ease forwards;
   animation-delay: 1.6s;
   opacity: 0;
 }
-
 .or-text {
   animation: fadeBounce 0.5s ease forwards;
   animation-delay: 1.8s;
   opacity: 0;
-  animation-fill-mode: forwards;
 }
-
 .signup-link {
   animation: slideUpFade 0.5s ease forwards;
   animation-delay: 2s;
   opacity: 0;
 }
+
+/* ------------------ DASHBOARD PAGE ------------------ */
+body.dashboard-page {
+  margin: 0;
+  padding: 0;
+  background-color: #0d0d0d;
+  color: white;
+  font-family: 'Segoe UI', sans-serif;
+  height: 100vh;
+}
+
+/* Splash screen */
+#splashScreen {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background-color: black;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  transition: opacity 0.5s ease;
+}
+.splash-x {
+  font-size: 100px;
+  font-family: 'Ibrands';
+  animation: glowX 1s ease-in-out;
+}
+.capsule-loading {
+  font-family: 'Cal';
+  font-size: 16px;
+  color: white;
+  margin-top: 10px;
+  animation: fadeOutText 3s ease-in-out;
+}
+@keyframes glowX {
+  0% { opacity: 0; text-shadow: none; transform: scale(0.9); }
+  50% { opacity: 1; text-shadow: 0 0 15px #888888; transform: scale(1.1); }
+  100% { opacity: 0; text-shadow: none; transform: scale(1); }
+}
+@keyframes fadeOutText {
+  0% { opacity: 0; transform: translateY(10px); }
+  50% { opacity: 1; }
+  100% { opacity: 0; transform: translateY(-10px); }
+}
+
+/* Dashboard header layout */
+.dashboard-header {
+  position: relative;
+  height: 80px;
+  width: 100%;
+  margin-top: 20px;
+}
+.dashboard-logo {
+  position: absolute;
+  top: 50%;
+  left: 30px;
+  transform: translateY(-50%);
+  height: 40px;
+  width: 40px;
+}
+.dashboard-title {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: 'iBrands';
+  font-size: 28px;
+  color: white;
+  text-align: center;
+}
+.about-link {
+  position: absolute;
+  top: 50%;
+  right: 20px;
+  transform: translateY(-50%);
+  font-size: 14px;
+  font-family: 'Cal';
+  color: #ccc;
+  cursor: pointer;
+  text-decoration: none;
+}
+.about-link:hover {
+  text-decoration: underline;
+}
+
+/* Dashboard main content */
+.dashboard-content {
+  text-align: center;
+  margin-top: 60px;
+  padding: 15px 30px;
+}
+
+@font-face {
+  font-family: 'Poppins';
+  src: url('Poppins-Medium.ttf') format('opentype');
+}
+
+#welcomeText {
+  font-family: 'Poppins';
+  font-size: 22px;
+  font-weight: bold;
+  margin-top: -20px;
+}
+.send-link {
+  font-size: 16px;
+  margin: 10px 0;
+  cursor: pointer;
+}
+.divider {
+  width: 200px;
+  margin: 50px auto;
+  margin-bottom: 60px;
+  border: 0.5px solid #333;
+}
+.message-box {
+  background-color: #1e1e1e;
+  border-radius: 20px;
+  padding: 30px 40px;
+  margin-top: 30px;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.caption2 {
+  font-family: Cal, sans-serif;
+  font-size: 18px;
+  color: #ccc;
+  margin-bottom: 10px;
+  text-align: left;
+}
+
+.history-container {
+  font-family: 'Poppins', sans-serif;
+  margin-top: -10px;
+  font-size: 15px;
+  color: #aaa;
+  text-align: left;
+  opacity: 0;
+  animation: fadeIn 1s ease forwards;
+  animation-delay: 0.5s
+}
+/* ---------- Hamburger Menu + Side Panel ---------- */
+.hamburger {
+  position: absolute;
+  top: 48%;
+  right: 30px;
+  transform: translateY(-50%);
+  font-size: 40px;
+  color: #ccc;
+  cursor: pointer;
+  user-select: none;
+  z-index: 1001;
+}
+
+/* Side Drawer */
+.side-panel {
+  position:fixed;
+  top: 0;
+  right: -240px;
+  width: 240px;
+  height: 100%;
+  background-color: #1a1a1a;
+  box-shadow: -2px 0 8px rgba(0, 0, 0, 0.7);
+  padding-top: 100px;
+  z-index: 1002;
+  transition: right 0.3s ease;
+}
+
+.side-panel.open {
+  right: 0;
+}
+
+.drawer-item {
+  padding: 15px 20px;
+  font-size: 16px;
+  font-family: 'Cal';
+  color: #ccc;
+  border-bottom: 1px solid #333;
+  cursor: pointer;
+}
+.drawer-item:hover {
+  background-color: #292929;
+  color: white;
+}
+
+/* Backdrop */
+.drawer-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.3);
+  opacity: 0;
+  visibility: hidden;
+  z-index: 1000;
+  transition: opacity 0.3s ease;
+}
+.drawer-overlay.show {
+  opacity: 1;
+  visibility: visible;
+}
+.version {
+  position:absolute;
+  bottom: 130px;
+  left: 90px;
+  font-size: 15px;
+  color: #aaa;
+  font-family:'Ibrands';
+}
+
+.message-box {
+  background-color: #1a1a1a;
+  border-radius: 20px;
+  padding: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.message-box input[type="text"] {
+  background-color: black;
+  color: white;
+  border: 1px solid #312c2c;
+  padding: 12px 16px;
+  border-radius: 8px;
+  width: 500px;
+  font-family:'Segoe UI';
+}
+
+.message-box textarea {
+  width: 3000px;
+  height: 150px;
+  padding: 12px 16px;
+  border-radius: 10px;
+  border: none;
+  resize: none;
+  font-family:'Segoe UI';
+  font-size: 14px;
+  background-color: #0D0D0D;
+  color:white;
+}
+
+.message-box button {
+  background-color: grey;
+  color: white;
+  border: none;
+  padding: 12px 18px;
+  border-radius: 8px;
+  font-family: 'Cal', sans-serif;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.message-box button:hover {
+  background-color: #5a5a5a;
+}
+
+.about-container {
+  text-align: center;
+}
+
+.about-title {
+  margin-bottom: 20px;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+
+.about-text {
+  width: 90%;
+  max-width: 1000px;
+  margin: 0 auto;
+  font-size: 16px;
+  line-height: 1.6;
+  color: #ccc;
+}
+
+.italic-muted {
+  font-style: italic;
+  color: #888;
+}
+
+.about-me-section {
+  width: 90%;
+  max-width: 1000px;
+  margin: 60px auto;
+  color: white;
+  text-align: center;
+}
+
+.about-me-heading {
+  font-size: 20px;
+  font-weight: lighter;
+  font-family: 'Cal';
+  margin-bottom: 25px;
+}
+
+.about-paragraph {
+  font-size: 16px;
+  line-height: 1.6;
+  color: #ccc;
+  margin: 0 auto;
+  max-width: 900px;
+}
+
+.about-quote {
+  font-size: 16px;
+  line-height: 1.8;
+  font-style: italic;
+  color: #888;
+}
+
+.capsule-tagline {
+  margin-top: 25px;
+  font-size: 15px;
+  letter-spacing: 1px;
+  font-family: 'iBrand', sans-serif;
+}
+
+.about-photo {
+  width: 180px;
+  border-radius: 50%;
+  margin-top: -30px;
+}
+
+.about-role {
+  margin-top: 20px;
+}
+
+.about-logo {
+  margin-top: 30px;
+  max-width: 240px;
+}
+
+.about-credit {
+  margin-top: 20px;
+}
+
+.about-divider {
+  margin: 40px auto;
+  width: 60%;
+  border-color: grey;
+}
+
+.copyright {
+  font-size: 12px;
+  color: grey;
+  text-align: center;
+  margin-top: 40px;
+}
+
+
+

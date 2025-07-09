@@ -6,12 +6,10 @@
   <title>CapsuleX - Login</title>
   <link rel="stylesheet" href="style.css" />
   <script>
-    // If video not watched in this session, go back to index
     if (!sessionStorage.getItem('videoPlayed')) {
       window.location.href = 'index.html';
     }
 
-    // Clear flag when user refreshes this page
     window.addEventListener('beforeunload', () => {
       sessionStorage.removeItem('videoPlayed');
     });
@@ -20,11 +18,13 @@
 <body>
   <div class="caption1">Hey Stalker!</div>
   <div class="caption2">Say it without saying who you are.</div>
-  <div class="logo"><span class="capsule">capsule</span><span class="grey-x">X</span></div>
+  <div class="intro-logo"><span class="capsule">capsule</span><span class="grey-x">X</span></div>
 
-  <input type="email" id="email" placeholder="Email address" />
-  <input type="password" id="password" placeholder="Password" />
+  <input type="email" id="email" placeholder="Email address" autocomplete="new-password" />
+  <input type="password" id="password" placeholder="Password" autocomplete="new-password" />
   <button id="loginBtn">Log In</button>
+
+  <div id="statusMessage" style="margin-top: 10px; font-size: 14px; color: #ccc;"></div>
 
   <div class="or-text">OR</div>
   <a href="signup.html" class="signup-link">sign up</a>
@@ -33,6 +33,7 @@
     document.getElementById("loginBtn").addEventListener("click", async function () {
       const email = document.getElementById("email").value;
       const password = document.getElementById("password").value;
+      const statusDiv = document.getElementById("statusMessage");
 
       const response = await fetch("https://capsule-x-backend.onrender.com/api/auth/login", {
         method: "POST",
@@ -45,13 +46,34 @@
       const result = await response.json();
 
       if (response.ok && result.token) {
-        // ✅ Store token in localStorage
         localStorage.setItem("token", result.token);
-        alert("Login successful!");
-        window.location.href = "dashboard.html"; // Replace with real dashboard when ready
+        if (result.name) {
+          localStorage.setItem("name", result.name);
+        }
+
+        statusDiv.textContent = "Login successful. Redirecting...";
+        statusDiv.style.color = "lightgreen";
+
+        setTimeout(() => {
+          window.location.href = "dashboard.html";
+        }, 1000);
       } else {
-        alert(result.message || result.error || "Login failed.");
+        statusDiv.textContent = result.message || result.error || "Login failed.";
+        statusDiv.style.color = "salmon";
       }
+    });
+
+    if (!sessionStorage.getItem('videoPlayed')) {
+      window.location.href = 'index.html';
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      document.getElementById('email').value = '';
+      document.getElementById('password').value = '';
+    });
+
+    window.addEventListener('beforeunload', () => {
+      sessionStorage.removeItem('videoPlayed');
     });
   </script>
 </body>
