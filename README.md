@@ -27,13 +27,13 @@ This is the frontend repository of CapsuleX, built using HTML, CSS, and JavaScri
 # Deployment
 This repository is deployed via GitHub Pages.  
 To update the site:
->> bash
+> bash
 git add .
 git commit -m "Update frontend"
 git push
 
 # Developer
-Kevin Antony — Full-stack Developer & Creator of CapsuleX
+Kevin Antony — Full-stack Developer & Creator of Capsule.
 Logo design: Nishanth Antony
 
 # License
