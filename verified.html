@@ -8,38 +8,60 @@
 </head>
 <body class="verified-page">
   <div class="verified-box">
-    <h1 class="capsulex-title" id="verifiedHeading">
-      ✅ Identity verified. Access granted. Welcome to CapsuleX — where the incognito begins.
-    </h1>
-    <p class="verified-text" id="verifiedMessage">
-      You're all set to log in and start sending anonymous messages.
-    </p>
+    <h1 class="capsule-title" id="verifiedHeading">Verifying your email...</h1>
+    <p class="verified-text" id="verifiedMessage">Please wait while we verify your account.</p>
     <a href="login.html" class="btn btn-capsulex" id="manualRedirect" style="display: none;">Go to Login</a>
   </div>
 
   <script>
-    // Extract token and name from URL if present
     const params = new URLSearchParams(window.location.search);
     const token = params.get("token");
-    const name = params.get("name");
 
-    if (token) {
-      // Store token and name in localStorage
-      localStorage.setItem("token", token);
-      if (name) {
-        localStorage.setItem("name", name);
+    async function verifyEmail() {
+      if (!token) {
+        document.getElementById("verifiedHeading").textContent = "Invalid verification link";
+        document.getElementById("verifiedMessage").textContent = "Token is missing from the URL.";
+        document.getElementById("manualRedirect").style.display = "inline-block";
+        return;
       }
 
-      // Show message briefly, then auto-redirect to dashboard
-      setTimeout(() => {
-        window.location.href = "dashboard.html";
-      }, 2000);
-    } else {
-      // Fallback: If token missing, show manual button
-      document.getElementById("verifiedHeading").textContent = "Your email has been verified!";
-      document.getElementById("verifiedMessage").textContent = "You can now log in to your account.";
-      document.getElementById("manualRedirect").style.display = "inline-block";
+      try {
+        const res = await fetch("https://capsule-x-backend.onrender.com/api/auth/verify-email", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({ token })
+        });
+
+        const data = await res.json();
+
+        if (res.ok) {
+          // Save token and name (if present)
+          localStorage.setItem("token", data.token || token);
+          if (data.name) {
+            localStorage.setItem("name", data.name);
+          }
+
+          document.getElementById("verifiedHeading").textContent = "✅ Identity verified. Access granted.";
+          document.getElementById("verifiedMessage").textContent = "Redirecting to your dashboard...";
+
+          setTimeout(() => {
+            window.location.href = "dashboard.html";
+          }, 2000);
+        } else {
+          document.getElementById("verifiedHeading").textContent = "Verification failed";
+          document.getElementById("verifiedMessage").textContent = data.error || "Something went wrong.";
+          document.getElementById("manualRedirect").style.display = "inline-block";
+        }
+      } catch (err) {
+        document.getElementById("verifiedHeading").textContent = "Error";
+        document.getElementById("verifiedMessage").textContent = "Network error occurred.";
+        document.getElementById("manualRedirect").style.display = "inline-block";
+      }
     }
+
+    verifyEmail();
   </script>
 </body>
 </html>
