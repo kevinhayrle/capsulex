@@ -14,36 +14,29 @@
   </div>
 
 <script>
- const params = new URLSearchParams(window.location.search);
-const token = params.get("token");
+  const params = new URLSearchParams(window.location.search);
+  const token = params.get("token");
+  const name = params.get("name");
 
-if (token) {
-  fetch(`https://capsule-x-backend.onrender.com/api/auth/verify?token=${token}`)
-    .then(res => res.json())
-    .then(data => {
-      if (data.success && data.token) {
-        localStorage.setItem("token", data.token);
-        localStorage.setItem("name", data.name || "User");
-        setTimeout(() => {
-          window.location.href = "dashboard.html";
-        }, 2000);
-      } else {
-        showFallback();
-      }
-    })
-    .catch(err => {
-      console.error("Network error:", err);
-      showFallback();
-    });
-} else {
-  showFallback();
-}
+  if (token) {
+    localStorage.setItem("token", token);
+    localStorage.setItem("name", name || "User");
 
-function showFallback() {
-  document.getElementById("verifiedHeading").textContent = "Verification Failed";
-  document.getElementById("verifiedMessage").textContent = "Your link may have expired or is invalid.";
-  document.getElementById("manualRedirect").style.display = "inline-block";
-}
+    document.getElementById("verifiedHeading").textContent = "✅ Identity verified. Access granted.";
+    document.getElementById("verifiedMessage").textContent = `Welcome to CapsuleX, ${name || "User"}!`;
+
+    setTimeout(() => {
+      window.location.href = "dashboard.html";
+    }, 2000);
+  } else {
+    showFallback();
+  }
+
+  function showFallback() {
+    document.getElementById("verifiedHeading").textContent = "Verification Failed";
+    document.getElementById("verifiedMessage").textContent = "Your link may have expired or is invalid.";
+    document.getElementById("manualRedirect").style.display = "inline-block";
+  }
 </script>
 </body>
 </html>
