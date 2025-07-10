@@ -50,19 +50,17 @@
 
       const result = await response.json();
 
-      if (response.ok && result.requiresVerification) {
-        // ✅ Sign up succeeded, email needs verification
-        messageBox.textContent = "Please check your inbox to verify your email.";
-        messageBox.style.color = "lightgreen";
-        return;
-      }
+      if (result.error?.toLowerCase().includes("already registered")) {
+  messageBox.textContent = "Please check your inbox to verify your email.";
+  messageBox.style.color = "lightgreen";
+  return;
+}
 
-      if (!response.ok && result.error?.includes("already registered")) {
-        // ⚠ Email already exists — treat it as pending verification
-        messageBox.textContent = "Please check your inbox to verify your email.";
-        messageBox.style.color = "lightgreen";
-        return;
-      }
+if (response.ok && result.requiresVerification) {
+  messageBox.textContent = "Please check your inbox to verify your email.";
+  messageBox.style.color = "lightgreen";
+  return;
+}
 
       // Proceed to login if no verification needed (rare case)
       const loginRes = await fetch("https://capsule-x-backend.onrender.com/api/auth/login", {
