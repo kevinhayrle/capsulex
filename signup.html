@@ -41,6 +41,7 @@
     }
 
     try {
+      // Try to sign up
       const response = await fetch("https://capsule-x-backend.onrender.com/api/auth/signup", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -49,37 +50,40 @@
 
       const result = await response.json();
 
-      if (response.ok) {
-        if (result.requiresVerification) {
-          messageBox.textContent = "Please check your inbox to verify your email before logging in.";
-          messageBox.style.color = "lightgreen";
-          return; // ✅ Skip auto-login
-        }
+      if (response.ok && result.requiresVerification) {
+        // ✅ Sign up succeeded, email needs verification
+        messageBox.textContent = "Please check your inbox to verify your email.";
+        messageBox.style.color = "lightgreen";
+        return;
+      }
 
-        // If no verification needed, proceed to auto-login
-        const loginRes = await fetch("https://capsule-x-backend.onrender.com/api/auth/login", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ email, password })
-        });
+      if (!response.ok && result.error?.includes("already registered")) {
+        // ⚠ Email already exists — treat it as pending verification
+        messageBox.textContent = "Please check your inbox to verify your email.";
+        messageBox.style.color = "lightgreen";
+        return;
+      }
 
-        const loginData = await loginRes.json();
+      // Proceed to login if no verification needed (rare case)
+      const loginRes = await fetch("https://capsule-x-backend.onrender.com/api/auth/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password })
+      });
 
-        if (loginRes.ok && loginData.token) {
-          localStorage.setItem("token", loginData.token);
-          localStorage.setItem("name", loginData.name || name);
-          window.location.href = "dashboard.html";
-        } else {
-          messageBox.textContent = loginData.error || "Login failed.";
-          messageBox.style.color = "red";
-        }
+      const loginData = await loginRes.json();
+
+      if (loginRes.ok && loginData.token) {
+        localStorage.setItem("token", loginData.token);
+        localStorage.setItem("name", loginData.name || name);
+        window.location.href = "dashboard.html";
       } else {
-        messageBox.textContent = result.error || "Signup failed.";
-        messageBox.style.color = "red";
+        messageBox.textContent = loginData.error || "Login failed.";
+        messageBox.style.color = "salmon";
       }
     } catch (err) {
-      messageBox.textContent = "Signup Error: " + err.message;
-      messageBox.style.color = "red";
+      messageBox.textContent = "Error: " + err.message;
+      messageBox.style.color = "salmon";
     }
   });
 
