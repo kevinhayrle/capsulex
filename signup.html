@@ -51,14 +51,14 @@
       const result = await response.json();
 
       if (result.error?.toLowerCase().includes("already registered")) {
-  messageBox.textContent = "Please check your inbox to verify your email.";
-  messageBox.style.color = "lightgreen";
+  messageBox.textContent = "Please verify your email to log in. Check your inbox";
+  messageBox.style.color = "salmon";
   return;
 }
 
 if (response.ok && result.requiresVerification) {
-  messageBox.textContent = "Please check your inbox to verify your email.";
-  messageBox.style.color = "lightgreen";
+  messageBox.textContent = "Please verify your email to log in. Check your inbox";
+  messageBox.style.color = "salmon";
   return;
 }
 
