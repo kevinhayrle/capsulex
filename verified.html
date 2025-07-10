@@ -18,21 +18,21 @@
   const token = params.get("token");
   const name = params.get("name");
 
-  if (token) {
+  if (token && name) {
+    // ✅ Save to localStorage
     localStorage.setItem("token", token);
-    localStorage.setItem("name", name || "User");
+    localStorage.setItem("name", name);
 
+    // ✅ Update UI
     document.getElementById("verifiedHeading").textContent = "✅ Identity verified. Access granted.";
-    document.getElementById("verifiedMessage").textContent = `Welcome to CapsuleX, ${name || "User"}!`;
+    document.getElementById("verifiedMessage").textContent = `Welcome to CapsuleX, ${name}!`;
 
+    // ✅ Redirect after short delay
     setTimeout(() => {
       window.location.href = "dashboard.html";
     }, 2000);
   } else {
-    showFallback();
-  }
-
-  function showFallback() {
+    // ❌ Token or name is missing
     document.getElementById("verifiedHeading").textContent = "Verification Failed";
     document.getElementById("verifiedMessage").textContent = "Your link may have expired or is invalid.";
     document.getElementById("manualRedirect").style.display = "inline-block";
