@@ -1,4 +1,4 @@
-cd<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -8,9 +8,38 @@ cd<!DOCTYPE html>
 </head>
 <body class="verified-page">
   <div class="verified-box">
-    <h1 class="capsulex-title">✅ Identity verified. Access granted. Welcome to CapsuleX — where the incognito begins.</h1>
-    <p class="verified-text">You're all set to log in and start sending anonymous messages.</p>
-    <a href="login.html" class="btn btn-capsulex">Go to Login</a>
+    <h1 class="capsulex-title" id="verifiedHeading">
+      ✅ Identity verified. Access granted. Welcome to CapsuleX — where the incognito begins.
+    </h1>
+    <p class="verified-text" id="verifiedMessage">
+      You're all set to log in and start sending anonymous messages.
+    </p>
+    <a href="login.html" class="btn btn-capsulex" id="manualRedirect" style="display: none;">Go to Login</a>
   </div>
+
+  <script>
+    // Extract token and name from URL if present
+    const params = new URLSearchParams(window.location.search);
+    const token = params.get("token");
+    const name = params.get("name");
+
+    if (token) {
+      // Store token and name in localStorage
+      localStorage.setItem("token", token);
+      if (name) {
+        localStorage.setItem("name", name);
+      }
+
+      // Show message briefly, then auto-redirect to dashboard
+      setTimeout(() => {
+        window.location.href = "dashboard.html";
+      }, 2000);
+    } else {
+      // Fallback: If token missing, show manual button
+      document.getElementById("verifiedHeading").textContent = "✅ Your email has been verified!";
+      document.getElementById("verifiedMessage").textContent = "You can now log in to your account.";
+      document.getElementById("manualRedirect").style.display = "inline-block";
+    }
+  </script>
 </body>
 </html>

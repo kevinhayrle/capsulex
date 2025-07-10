@@ -589,7 +589,7 @@ body.verified-page {
 .form-message {
   margin-top: 10px;
   font-family: Arial, Helvetica, sans-serif;
-  color: red;
+  color: salmon;
   font-size: 0.95rem;
   text-align: center;
 }
