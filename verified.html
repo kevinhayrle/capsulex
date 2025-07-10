@@ -14,38 +14,36 @@
   </div>
 
 <script>
-  const params = new URLSearchParams(window.location.search);
-  const token = params.get("token");
+ const params = new URLSearchParams(window.location.search);
+const token = params.get("token");
 
-  if (token) {
-    // Call backend to verify email
-    fetch("https://capsule-x-backend.onrender.com/api/auth/verify-email?token=" + token)
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.success && data.token) {
-          localStorage.setItem("token", data.token);
-          if (data.name) localStorage.setItem("name", data.name);
+if (token) {
+  fetch(`https://capsule-x-backend.onrender.com/api/auth/verify?token=${token}`)
+    .then(res => res.json())
+    .then(data => {
+      if (data.success && data.token) {
+        localStorage.setItem("token", data.token);
+        localStorage.setItem("name", data.name || "User");
+        setTimeout(() => {
+          window.location.href = "dashboard.html";
+        }, 2000);
+      } else {
+        showFallback();
+      }
+    })
+    .catch(err => {
+      console.error("Network error:", err);
+      showFallback();
+    });
+} else {
+  showFallback();
+}
 
-          setTimeout(() => {
-            window.location.href = "dashboard.html";
-          }, 2000);
-        } else {
-          document.getElementById("verifiedHeading").textContent = "Verification failed";
-          document.getElementById("verifiedMessage").textContent = data.error || "Invalid or expired token.";
-          document.getElementById("manualRedirect").style.display = "inline-block";
-        }
-      })
-      .catch((err) => {
-        console.error("❌ Error verifying:", err);
-        document.getElementById("verifiedHeading").textContent = "Network Error";
-        document.getElementById("verifiedMessage").textContent = "Could not reach the server. Try again later.";
-        document.getElementById("manualRedirect").style.display = "inline-block";
-      });
-  } else {
-    document.getElementById("verifiedHeading").textContent = "Invalid Link";
-    document.getElementById("verifiedMessage").textContent = "No verification token found.";
-    document.getElementById("manualRedirect").style.display = "inline-block";
-  }
+function showFallback() {
+  document.getElementById("verifiedHeading").textContent = "Verification Failed";
+  document.getElementById("verifiedMessage").textContent = "Your link may have expired or is invalid.";
+  document.getElementById("manualRedirect").style.display = "inline-block";
+}
 </script>
 </body>
 </html>
