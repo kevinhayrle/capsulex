@@ -33,7 +33,7 @@ git commit -m "Update frontend"
 git push
 
 # Developer
-Kevin Antony — Full-stack Developer & Creator of Capsule.
+Kevin Antony — Full-stack Developer & Creator of CapsuleX.
 Logo design: Nishanth Antony
 
 # License
