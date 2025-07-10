@@ -49,6 +49,7 @@
         if (res.ok) {
           if (result.requiresVerification) {
             msgDiv.textContent = "✅ Please check your inbox to verify your account.";
+            msgDiv.style.color = "lightgreen";
             return;
           }
 
@@ -66,7 +67,7 @@
             localStorage.setItem("name", loginData.name || name);
             window.location.href = "dashboard.html";
           } else {
-            // No popup — just redirect silently to login
+            // No popup — just redirect silently
             window.location.href = "login.html";
           }
         } else {
