@@ -27,18 +27,16 @@
   <div class="or-text">OR</div> 
   <a href="login.html" class="signup-link">log in</a> 
 
-  <script>
+<script>
   document.getElementById("signupBtn").addEventListener("click", async function () {
-    const name = document.getElementById("name").value.trim();
-    const email = document.getElementById("email").value.trim();
-    const password = document.getElementById("password").value.trim();
-    const msgDiv = document.getElementById("signupMessage");
-    msgDiv.textContent = "";
-    msgDiv.style.color = "";
+    const name = document.getElementById("name").value;
+    const email = document.getElementById("email").value;
+    const password = document.getElementById("password").value;
+    const messageBox = document.getElementById("signupMessage");
 
     if (!name || !email || !password) {
-      msgDiv.textContent = "Please fill in all fields.";
-      msgDiv.style.color = "orange";
+      messageBox.textContent = "Please fill in all the fields.";
+      messageBox.style.color = "orange";
       return;
     }
 
@@ -53,12 +51,12 @@
 
       if (response.ok) {
         if (result.requiresVerification) {
-          msgDiv.textContent = "Please verify your email to log in. Check your inbox.";
-          msgDiv.style.color = "lightgreen";
-          return; // Don't try auto-login
+          messageBox.textContent = "Please check your inbox to verify your email before logging in.";
+          messageBox.style.color = "lightgreen";
+          return; // ✅ Skip auto-login
         }
 
-        // If no verification needed, auto-login
+        // If no verification needed, proceed to auto-login
         const loginRes = await fetch("https://capsule-x-backend.onrender.com/api/auth/login", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -72,16 +70,16 @@
           localStorage.setItem("name", loginData.name || name);
           window.location.href = "dashboard.html";
         } else {
-          msgDiv.textContent = "Login failed. Please try again.";
-          msgDiv.style.color = "salmon";
+          messageBox.textContent = loginData.error || "Login failed.";
+          messageBox.style.color = "red";
         }
       } else {
-        msgDiv.textContent = result.error || "Signup failed.";
-        msgDiv.style.color = "salmon";
+        messageBox.textContent = result.error || "Signup failed.";
+        messageBox.style.color = "red";
       }
     } catch (err) {
-      msgDiv.textContent = "Something went wrong. Try again.";
-      msgDiv.style.color = "red";
+      messageBox.textContent = "Signup Error: " + err.message;
+      messageBox.style.color = "red";
     }
   });
 
