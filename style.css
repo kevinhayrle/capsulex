@@ -588,7 +588,8 @@ body.verified-page {
 
 .form-message {
   margin-top: 10px;
-  color: #ff4d4d;
+  font-family: Arial, Helvetica, sans-serif;
+  color: red;
   font-size: 0.95rem;
   text-align: center;
 }
