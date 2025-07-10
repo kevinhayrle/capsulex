@@ -15,7 +15,7 @@
   <script>
     const video = document.getElementById('introVideo');
 
-    // When the video ends, go to login.html
+    
     video.addEventListener('ended', () => {
       sessionStorage.setItem('videoPlayed', 'true'); // so login page knows user watched it
       window.location.href = 'login.html';

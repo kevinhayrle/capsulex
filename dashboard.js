@@ -1,5 +1,4 @@
 document.addEventListener("DOMContentLoaded", async function () {
-  //  Splash Screen effect
   const splash = document.getElementById("splashScreen");
   const dashboard = document.getElementById("mainDashboard");
 
@@ -14,7 +13,7 @@ document.addEventListener("DOMContentLoaded", async function () {
     }, 500);  
   }, 2500); 
 
-  // Welcome Message
+  
   const name = localStorage.getItem("userName") || "User";
   const token = localStorage.getItem("token");
 
@@ -23,14 +22,12 @@ document.addEventListener("DOMContentLoaded", async function () {
     welcomeElement.textContent = `Welcome, ${name}`;
   }
 
-  // If not logged in, redirect
   if (!token) {
     alert("You're not logged in!");
     window.location.href = "login.html";
     return;
   }
 
-  // Load Message History
   try {
     const res = await fetch("https://capsule-x-backend.onrender.com/api/message/history", {
       method: "GET",

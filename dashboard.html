@@ -8,16 +8,14 @@
 </head>
 <body class="dashboard-page">
 
-  <!-- Splash Screen -->
   <div id="splashScreen">
     <div class="grey-x splash-x">X</div>
     <div class="capsule-loading">Your capsule is loading...</div>
   </div>
 
-  <!-- Dashboard -->
   <div id="mainDashboard" style="display: none;">
 
-    <!-- Header -->
+
      <a href="dashboard.html">
     <div class="dashboard-header">
       <img src="logo.png" class="dashboard-logo" alt="Logo" />
@@ -35,7 +33,7 @@
 </div>
     </div>
 
-    <!-- Main Content -->
+  
     <div class="dashboard-content">
       <div class="caption1" id="welcomeText">Welcome, User</div>
       <div class="grey-x send-link" onclick="window.location.href='send.html'">Send new message</div>
@@ -51,13 +49,13 @@
   <script src="dashboard.js"></script>
   <script>
   window.addEventListener("DOMContentLoaded", () => {
-    // Splash screen: hide after 1s
+  
     setTimeout(() => {
       document.getElementById("splashScreen").style.display = "none";
       document.getElementById("mainDashboard").style.display = "block";
     }, 1000);
 
-    // Update welcome text
+    
     const name = localStorage.getItem("name") || "User";
     document.getElementById("welcomeText").innerText = `Welcome, ${name}`;
   });
