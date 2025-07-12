@@ -15,16 +15,16 @@
   <script>
     const video = document.getElementById('introVideo');
 
-    
     video.addEventListener('ended', () => {
-      sessionStorage.setItem('videoPlayed', 'true'); // so login page knows user watched it
+      sessionStorage.setItem('videoPlayed', 'true');
       window.location.href = 'login.html';
     });
 
-    // Restart video cleanly if user refreshes on index
     window.addEventListener('DOMContentLoaded', () => {
       video.currentTime = 0;
-      video.play();
+      video.play().catch(err => {
+        console.warn("Autoplay issue:", err);
+      });
     });
   </script>
 </body>

@@ -24,7 +24,7 @@
   <input type="password" id="password" placeholder="Password" autocomplete="new-password" />
   <button id="loginBtn">Log In</button>
 
-  <div id="statusMessage" style="margin-top: 10px; font-size: 14px; color: #ccc;"></div>
+  <div id="statusMessage" class="form-message"></div>
 
   <div class="or-text">OR</div>
   <a href="signup.html" class="signup-link">sign up</a>
@@ -63,16 +63,9 @@
       }
     });
 
-    if (!sessionStorage.getItem('videoPlayed')) {
-    }
-
     window.addEventListener('DOMContentLoaded', () => {
       document.getElementById('email').value = '';
       document.getElementById('password').value = '';
-    });
-
-    window.addEventListener('beforeunload', () => {
-      sessionStorage.removeItem('videoPlayed');
     });
   </script>
 </body>
