@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>CapsuleX - Forgot Password</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="center-container">
+    <div class="intro-logo">capsule<span class="grey-x">X</span></div>
+    <div class="caption1">Forgot Password?</div>
+    <div class="caption2">We’ll send you an OTP to reset your password.</div>
+
+    <input type="email" id="email" placeholder="Email address" class="input-field" />
+    <button class="submit-btn" onclick="requestResetOTP()">Send OTP</button>
+
+    <p id="response" class="form-message"></p>
+
+    <div class="or-text">OR</div>
+    <a href="login.html" class="signup-link">back to login</a>
+  </div>
+
+  <script>
+    async function requestResetOTP() {
+      const email = document.getElementById('email').value.trim();
+      const responseBox = document.getElementById('response');
+
+      responseBox.textContent = '';
+      responseBox.style.color = 'salmon';
+
+      if (!email) {
+        responseBox.textContent = 'Please enter your email address.';
+        return;
+      }
+
+      try {
+        const res = await fetch('https://capsule-x-backend.onrender.com/api/auth/forgot-password', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email })
+        });
+
+        const data = await res.json();
+
+        if (res.ok) {
+          sessionStorage.setItem('reset_email', email);
+          responseBox.textContent = 'OTP sent. Redirecting...';
+          responseBox.style.color = 'lightgreen';
+          setTimeout(() => {
+            window.location.href = 'reset.html';
+          }, 1200);
+        } else {
+          responseBox.textContent = data.error || 'Something went wrong.';
+        }
+      } catch (err) {
+        console.error('❌ Network error:', err);
+        responseBox.textContent = 'Network error. Please try again.';
+      }
+    }
+  </script>
+</body>
+</html>
