@@ -1,55 +1,80 @@
-<script>
-  document.getElementById("signupBtn").addEventListener("click", async function () {
-    const name = document.getElementById("name").value.trim();
-    const email = document.getElementById("email").value.trim();
-    const password = document.getElementById("password").value.trim();
-    const messageBox = document.getElementById("signupMessage");
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>CapsuleX - Sign Up</title>
+  <link rel="stylesheet" href="style.css" />
+  <script>
+    window.addEventListener('beforeunload', () => {
+      sessionStorage.removeItem('videoPlayed');
+    });
+  </script>
+</head>
 
-    messageBox.textContent = '';
-    messageBox.style.color = 'salmon';
+<body>
+  <div class="caption1">Hey Stalker!</div>
+  <div class="caption2">Say it without saying who you are.</div>
+  <div class="intro-logo">capsule<span class="grey-x">X</span></div>
 
-    if (!name || !email || !password) {
-      messageBox.textContent = "Please fill in all the fields.";
-      return;
-    }
+  <input type="text" id="name" placeholder="Name" autocomplete="new-password" />
+  <input type="email" id="email" placeholder="Email address" autocomplete="new-password" />
+  <input type="password" id="password" placeholder="Password" autocomplete="new-password" />
+  <button id="signupBtn">Sign Up</button>
 
-    try {
-      const response = await fetch("https://capsule-x-backend.onrender.com/api/auth/signup", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name, email, password })
-      });
+  <div id="signupMessage" class="form-message"></div>
 
-      const result = await response.json();
+  <div class="or-text">OR</div>
+  <a href="login.html" class="signup-link">log in</a>
 
-      if (!response.ok) {
-        messageBox.textContent = result.error || "Signup failed.";
+  <script>
+    document.getElementById("signupBtn").addEventListener("click", async function () {
+      const name = document.getElementById("name").value.trim();
+      const email = document.getElementById("email").value.trim();
+      const password = document.getElementById("password").value.trim();
+      const messageBox = document.getElementById("signupMessage");
+
+      messageBox.textContent = '';
+      messageBox.style.color = 'salmon';
+
+      if (!name || !email || !password) {
+        messageBox.textContent = "Please fill in all the fields.";
         return;
       }
 
-      // ✅ OTP sent — proceed to OTP page
-      sessionStorage.setItem("pending_email", email);
-      messageBox.style.color = "lightgreen";
-      messageBox.textContent = "OTP sent to your inbox. Redirecting...";
-      setTimeout(() => window.location.href = "otp.html", 1200);
+      try {
+        const response = await fetch("https://capsule-x-backend.onrender.com/api/auth/signup", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ name, email, password })
+        });
 
-    } catch (err) {
-      messageBox.textContent = "Error: " + err.message;
-    }
-  });
+        const result = await response.json();
 
-  window.addEventListener('DOMContentLoaded', () => {
-    document.getElementById('name').value = '';
-    document.getElementById('email').value = '';
-    document.getElementById('password').value = '';
-  });
+        if (!response.ok) {
+          messageBox.textContent = result.error || "Signup failed.";
+          return;
+        }
 
-  window.addEventListener('beforeunload', () => {
-    sessionStorage.removeItem('videoPlayed');
-  });
-  window.addEventListener('DOMContentLoaded', () => {
-  const emailInput = document.getElementById('email');
-  const storedEmail = sessionStorage.getItem('pending_email');
-  if (storedEmail) emailInput.value = storedEmail;
-});
-</script>
+        sessionStorage.setItem("pending_email", email);
+        messageBox.style.color = "lightgreen";
+        messageBox.textContent = "OTP sent to your inbox. Redirecting...";
+
+        setTimeout(() => {
+          window.location.href = "otp.html";
+        }, 1200);
+
+      } catch (err) {
+        console.error("❌ Signup failed:", err);
+        messageBox.textContent = "Something went wrong. Try again later.";
+      }
+    });
+
+    window.addEventListener('DOMContentLoaded', () => {
+      document.getElementById('name').value = '';
+      document.getElementById('email').value = '';
+      document.getElementById('password').value = '';
+    });
+  </script>
+</body>
+</html>
