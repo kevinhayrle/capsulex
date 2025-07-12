@@ -1,4 +1,4 @@
-/* ------------------ INTRO PAGE VIDEO STYLING ------------------ */
+/* INTRO PAGE VIDEO STYLING */
 body.intro-page {
   margin: 0;
   background-color: black;
@@ -14,7 +14,6 @@ body.intro-page {
   object-fit: contain;
 }
 
-/* ------------------ CUSTOM FONTS ------------------ */
 @font-face {
   font-family: 'Ibrands';
   src: url('ibrands-ligature.otf') format('opentype');
@@ -24,7 +23,7 @@ body.intro-page {
   src: url('CalSans-SemiBold 2.otf') format('opentype');
 }
 
-/* ------------------ LOGIN / SIGNUP PAGE ------------------ */
+/* LOGIN / SIGNUP PAGE */
 body:not(.intro-page):not(.dashboard-page) {
   margin: 0;
   padding: 0;
@@ -182,7 +181,7 @@ button {
   opacity: 0;
 }
 
-/* ------------------ DASHBOARD PAGE ------------------ */
+/* DASHBOARD PAGE */
 body.dashboard-page {
   margin: 0;
   padding: 0;
@@ -325,7 +324,7 @@ body.dashboard-page {
   animation: fadeIn 1s ease forwards;
   animation-delay: 0.5s
 }
-/* ---------- Hamburger Menu + Side Panel ---------- */
+/* Hamburger Menu + Side Panel */
 .hamburger {
   position: absolute;
   top: 48%;
@@ -539,7 +538,7 @@ body.dashboard-page {
   margin-top: 40px;
 }
 
-/* -------- VERIFIED PAGE -------- */
+/* VERIFIED PAGE */
 body.verified-page {
   background-color: #0d0d0d;
   display: flex;
@@ -611,7 +610,7 @@ body.verified-page {
   justify-content: center;
  
 }
-/* === CapsuleX Forgot Password Centering Fix === */
+
 .center-container .intro-logo {
   text-align: center;
   margin: 0 auto;
@@ -622,7 +621,7 @@ body.verified-page {
   display: block;
   text-align: center;
 }
-/* === CapsuleX OTP / Reset / Forgot Page Enhancements (v1.1) === */
+
 .title {
   font-family: 'Cal', sans-serif;
   font-size: 26px;
@@ -676,5 +675,5 @@ body.verified-page {
   text-align: center;
 }
 body.login-page .or-text {
-  margin-top: 5px; /* move it higher */
+  margin-top: 5px; 
 }
