@@ -5,6 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>CapsuleX - Sign Up</title>
   <link rel="stylesheet" href="style.css" />
+  <script>
+    window.addEventListener('beforeunload', () => {
+      sessionStorage.removeItem('videoPlayed');
+    });
+  </script>
 </head>
 
 <body>
@@ -52,9 +57,7 @@
             return;
           }
 
-          // Save email for OTP verification
-          localStorage.setItem("pending_email", email);
-
+          localStorage.setItem("pending_email", email); // ✅ Save email here
           messageBox.style.color = "lightgreen";
           messageBox.textContent = "OTP sent to your inbox. Redirecting...";
 
