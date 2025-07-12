@@ -604,17 +604,17 @@ body.verified-page {
 }
 
 .center-container {
-  display: flex;
+  min-height: 100vh;
+  text-align: center;
+} display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  min-height: 100vh;
-  text-align: center;
-}
-
+ 
 /* === CapsuleX Forgot Password Centering Fix === */
 .center-container .intro-logo {
   text-align: center;
+  margin-top: 100px;
   margin: 0 auto;
 }
 
