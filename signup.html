@@ -28,6 +28,7 @@
   <a href="login.html" class="signup-link">log in</a>
 
   <script>
+  window.addEventListener('DOMContentLoaded', () => {
     document.getElementById("signupBtn").addEventListener("click", async function () {
       const name = document.getElementById("name").value.trim();
       const email = document.getElementById("email").value.trim();
@@ -69,12 +70,7 @@
         messageBox.textContent = "Something went wrong. Try again later.";
       }
     });
-
-    window.addEventListener('DOMContentLoaded', () => {
-      document.getElementById('name').value = '';
-      document.getElementById('email').value = '';
-      document.getElementById('password').value = '';
-    });
-  </script>
+  });
+</script>
 </body>
 </html>
