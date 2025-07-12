@@ -94,7 +94,7 @@ button:hover {
 }
 
 .or-text {
-  margin: 15px 0 5px;
+  margin: 8px 0 5px;
   font-size: 13px;
   color: #aaa;
 }
@@ -595,7 +595,6 @@ body.verified-page {
 }
 
 .signup-link {
-  font-family: Cal, sans-serif;
   color: #ccc;
   text-decoration: none;
   display: inline-block;
@@ -627,7 +626,7 @@ body.verified-page {
 .title {
   font-family: 'Cal', sans-serif;
   font-size: 26px;
-  margin-bottom: 100px;
+  margin-bottom: 10px;
 }
 
 .caption {
@@ -675,4 +674,7 @@ body.verified-page {
   font-family: 'Segoe UI', sans-serif;
   color: salmon;
   text-align: center;
+}
+body.login-page .or-text {
+  margin-top: 5px; /* move it higher */
 }

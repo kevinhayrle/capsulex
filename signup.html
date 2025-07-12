@@ -12,20 +12,24 @@
   </script>
 </head>
 
-<body>
-  <div class="caption1">Hey Stalker!</div>
-  <div class="caption2">Say it without saying who you are.</div>
-  <div class="intro-logo">capsule<span class="grey-x">X</span></div>
+<body class="signup-page">
+  <main class="center-container">
+    <div class="caption1">Hey Stalker!</div>
+    <div class="caption2">Say it without saying who you are.</div>
+    <div class="intro-logo"style="margin-bottom: 15px;">capsule<span class="grey-x">X</span></div>
 
-  <input type="text" id="name" placeholder="Name" autocomplete="new-password" />
-  <input type="email" id="email" placeholder="Email address" autocomplete="new-password" />
-  <input type="password" id="password" placeholder="Password" autocomplete="new-password" />
-  <button id="signupBtn">Sign Up</button>
+    <input type="text" id="name" placeholder="Name" class="input-field" autocomplete="new-password" />
+    <input type="email" id="email" placeholder="Email address" class="input-field" autocomplete="new-password" />
+    <input type="password" id="password" placeholder="Password" class="input-field" autocomplete="new-password" />
 
-  <div id="signupMessage" class="form-message"></div>
+    <button id="signupBtn" class="submit-btn">Sign Up</button>
+    <div id="signupMessage" class="form-message"></div>
 
-  <div class="or-text">OR</div>
-  <a href="login.html" class="signup-link">log in</a>
+    <div style="margin-top: 30px; text-align: center;">
+      <div class="or-text"style="margin-top: -26px;">OR</div>
+      <a href="login.html" class="signup-link">log in</a>
+    </div>
+  </main>
 
   <script>
     window.addEventListener('DOMContentLoaded', () => {
@@ -57,7 +61,7 @@
             return;
           }
 
-          localStorage.setItem("pending_email", email); // ✅ Save email here
+          localStorage.setItem("pending_email", email);
           messageBox.style.color = "lightgreen";
           messageBox.textContent = "OTP sent to your inbox. Redirecting...";
 
