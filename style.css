@@ -25,8 +25,8 @@ body.intro-page {
 }
 
 /* ------------------ LOGIN / SIGNUP PAGE ------------------ */
-bbody:not(.intro-page):not(.dashboard-page):not(.verified-page):not(.forgot-page) {
-  /* this rule applies to login/signup ONLY now */
+/* Default layout for pages like login, signup (no class on body) */
+body:not(.intro-page):not(.dashboard-page):not(.verified-page):not(.forgot-page):not(.reset-page) {
   margin: 0;
   padding: 0;
   font-family: 'Segoe UI', sans-serif;
@@ -38,6 +38,7 @@ bbody:not(.intro-page):not(.dashboard-page):not(.verified-page):not(.forgot-page
   justify-content: center;
   height: 100vh;
 }
+
 .caption1, .caption2 {
   font-family: 'Cal';
   font-size: 20px;
@@ -605,13 +606,11 @@ body.verified-page {
 
 .center-container {
   min-height: 100vh;
-  text-align: center;
-  display: flex;
+  text-align: center; display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
  
-}
 /* === CapsuleX Forgot Password Centering Fix === */
 .center-container .intro-logo {
   text-align: center;
@@ -622,63 +621,4 @@ body.verified-page {
 .center-container .signup-link {
   display: block;
   text-align: center;
-}
-/* === CapsuleX OTP / Reset / Forgot Page Enhancements (v1.1) === */
-.title {
-  font-family: 'Cal', sans-serif;
-  font-size: 26px;
-  margin-bottom: 10px;
-}
-
-.caption {
-  font-family: 'Cal', sans-serif;
-  font-size: 16px;
-  color: #aaa;
-  margin-bottom: 20px;
-}
-
-.input-field {
-  width: 200px;
-  padding: 12px;
-  margin-bottom: 12px;
-  border: none;
-  border-radius: 6px;
-  background-color: #1f1f1f;
-  color: white;
-  font-size: 15px;
-  animation: slideInRight 0.6s ease forwards;
-  animation-delay: 0.8s;
-  opacity: 0;
-}
-
-.submit-btn {
-  width: 180px;
-  padding: 12px;
-  background-color: #888;
-  color: white;
-  border: none;
-  border-radius: 6px;
-  font-size: 15px;
-  cursor: pointer;
-  animation: popIn 0.5s ease forwards;
-  animation-delay: 1s;
-  opacity: 0;
-}
-
-.submit-btn:hover {
-  background-color: #1a23c5;
-}
-
-.response-message {
-  margin-top: 12px;
-  font-size: 14px;
-  font-family: 'Segoe UI', sans-serif;
-  color: salmon;
-  text-align: center;
-}
-body.forgot-page {
-  margin: 0;
-  background-color: #0d0d0d;
-  font-family: 'Segoe UI', sans-serif;
-  color: #ffffff;
 }
