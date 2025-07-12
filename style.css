@@ -611,3 +611,15 @@ body.verified-page {
   min-height: 100vh;
   text-align: center;
 }
+
+/* === CapsuleX Forgot Password Centering Fix === */
+.center-container .intro-logo {
+  text-align: center;
+  margin: 0 auto;
+}
+
+.center-container .or-text,
+.center-container .signup-link {
+  display: block;
+  text-align: center;
+}
