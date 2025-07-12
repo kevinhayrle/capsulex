@@ -1,47 +1,19 @@
-<!DOCTYPE html> 
-<html lang="en"> 
-<head> 
-  <meta charset="UTF-8" /> 
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" /> 
-  <title>CapsuleX - Sign Up</title> 
-  <link rel="stylesheet" href="style.css" />
-  <script>
-    window.addEventListener('beforeunload', () => {
-      sessionStorage.removeItem('videoPlayed');
-    });
-  </script>
-</head> 
-
-<body> 
-  <div class="caption1">Hey Stalker!</div> 
-  <div class="caption2">Say it without saying who you are.</div> 
-  <div class="intro-logo">capsule<span class="grey-x">X</span></div> 
-
-  <input type="text" id="name" placeholder="Name" autocomplete="new-password" /> 
-  <input type="email" id="email" placeholder="Email address" autocomplete="new-password" /> 
-  <input type="password" id="password" placeholder="Password" autocomplete="new-password" /> 
-  <button id="signupBtn">Sign Up</button> 
-
-  <div id="signupMessage" class="form-message"></div>
-
-  <div class="or-text">OR</div> 
-  <a href="login.html" class="signup-link">log in</a> 
-
 <script>
   document.getElementById("signupBtn").addEventListener("click", async function () {
-    const name = document.getElementById("name").value;
-    const email = document.getElementById("email").value;
-    const password = document.getElementById("password").value;
+    const name = document.getElementById("name").value.trim();
+    const email = document.getElementById("email").value.trim();
+    const password = document.getElementById("password").value.trim();
     const messageBox = document.getElementById("signupMessage");
+
+    messageBox.textContent = '';
+    messageBox.style.color = 'salmon';
 
     if (!name || !email || !password) {
       messageBox.textContent = "Please fill in all the fields.";
-      messageBox.style.color = "salmon";
       return;
     }
 
     try {
-      // Try to sign up
       const response = await fetch("https://capsule-x-backend.onrender.com/api/auth/signup", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -50,38 +22,19 @@
 
       const result = await response.json();
 
-      if (result.error?.toLowerCase().includes("already registered")) {
-  messageBox.textContent = "Please verify your email to log in. Check your inbox";
-  messageBox.style.color = "salmon";
-  return;
-}
-
-if (response.ok && result.requiresVerification) {
-  messageBox.textContent = "Please verify your email to log in. Check your inbox";
-  messageBox.style.color = "salmon";
-  return;
-}
-
-      // Proceed to login if no verification needed (rare case)
-      const loginRes = await fetch("https://capsule-x-backend.onrender.com/api/auth/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, password })
-      });
-
-      const loginData = await loginRes.json();
-
-      if (loginRes.ok && loginData.token) {
-        localStorage.setItem("token", loginData.token);
-        localStorage.setItem("name", loginData.name || name);
-        window.location.href = "dashboard.html";
-      } else {
-        messageBox.textContent = loginData.error || "Login failed.";
-        messageBox.style.color = "salmon";
+      if (!response.ok) {
+        messageBox.textContent = result.error || "Signup failed.";
+        return;
       }
+
+      // ✅ OTP sent — proceed to OTP page
+      sessionStorage.setItem("pending_email", email);
+      messageBox.style.color = "lightgreen";
+      messageBox.textContent = "OTP sent to your inbox. Redirecting...";
+      setTimeout(() => window.location.href = "otp.html", 1200);
+
     } catch (err) {
       messageBox.textContent = "Error: " + err.message;
-      messageBox.style.color = "salmon";
     }
   });
 
@@ -94,6 +47,9 @@ if (response.ok && result.requiresVerification) {
   window.addEventListener('beforeunload', () => {
     sessionStorage.removeItem('videoPlayed');
   });
+  window.addEventListener('DOMContentLoaded', () => {
+  const emailInput = document.getElementById('email');
+  const storedEmail = sessionStorage.getItem('pending_email');
+  if (storedEmail) emailInput.value = storedEmail;
+});
 </script>
-</body> 
-</html>
