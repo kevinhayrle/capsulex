@@ -11,19 +11,6 @@ This is the frontend repository of CapsuleX, built using HTML, CSS, and JavaScri
 - Message history dashboard
 - About & legal information pages
 
-# Folder Structure
-/frontend
-│
-├── index.html          # Landing / splash
-├── login.html          # Login page
-├── signup.html         # Signup page
-├── dashboard.html      # Authenticated home
-├── send.html           # Anonymous message sender
-├── about.html          # About & credits
-├── style.css           # Global styling
-├── fonts/              # Custom fonts
-├── images/             # Logo, profile image
-
 # Deployment
 This repository is deployed via GitHub Pages.  
 To update the site:
