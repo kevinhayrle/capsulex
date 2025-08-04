@@ -28,4 +28,4 @@ This project is protected by copyright.
 You may not reproduce, reuse, or redistribute any portion of this site without permission.
 
 # Live Site
-https://kevinhayrle.github.io/capsulex/
+https://capsule-x.netlify.app
