@@ -19,13 +19,13 @@ git add .
 git commit -m "Update frontend"
 git push
 
-# Developer
-Kevin Antony — Full-stack Developer & Creator of CapsuleX.
-Logo design: Nishanth Antony
+## Developer
+**Kevin Antony**  
+*Full-stack Developer & Creator of CapsuleX*   
 
-# License
+## License
 Frontend code © 2025 **Kevin Antony**  
-All rights reserved. Redistribution or replication is not permitted without written consent.
+All rights reserved. Redistribution or replication is not permitted without written consent.  
 
 # Live Site
 https://capsule-x.netlify.app
