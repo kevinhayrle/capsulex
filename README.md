@@ -24,8 +24,8 @@ Kevin Antony — Full-stack Developer & Creator of CapsuleX.
 Logo design: Nishanth Antony
 
 # License
-This project is protected by copyright.
-You may not reproduce, reuse, or redistribute any portion of this site without permission.
+Frontend code © 2025 **Kevin Antony**  
+All rights reserved. Redistribution or replication is not permitted without written consent.
 
 # Live Site
 https://capsule-x.netlify.app
