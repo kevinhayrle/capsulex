@@ -397,10 +397,10 @@ body.dashboard-page {
 .cortex {
   position:absolute;
   bottom: 120px;
-  left: 90px;
+  left: 85px;
   font-size: 12px;
   color: grey;
-  font-family:'Ibrands';
+  font-family:'arial';
 }
 
 .message-box {
