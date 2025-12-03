@@ -19,6 +19,10 @@ body.intro-page {
   src: url('ibrands-ligature.otf') format('opentype');
 }
 @font-face {
+  font-family: 'sf.bold';
+  src: url('sf.bold.otf') format('opentype');
+}
+@font-face {
   font-family: 'Cal';
   src: url('CalSans-SemiBold 2.otf') format('opentype');
 }
@@ -397,10 +401,10 @@ body.dashboard-page {
 .cortex {
   position:absolute;
   bottom: 120px;
-  left: 85px;
+  left: 87px;
   font-size: 12px;
   color: grey;
-  font-family:'arial';
+  font-family:'sf.bold';
 }
 
 .message-box {
