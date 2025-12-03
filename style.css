@@ -394,6 +394,15 @@ body.dashboard-page {
   font-family:'Ibrands';
 }
 
+.Cortex {
+  position:absolute;
+  bottom: 120px;
+  left: 90px;
+  font-size: 15px;
+  color: #aaa;
+  font-family:'arial';
+}
+
 .message-box {
   background-color: #1a1a1a;
   border-radius: 20px;
