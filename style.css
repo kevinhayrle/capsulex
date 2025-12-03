@@ -30,7 +30,7 @@ body:not(.intro-page):not(.dashboard-page) {
   font-family: 'Segoe UI', sans-serif;
   background-color: #0d0d0d;
   color: #ffffff;
-  display: flex;
+  display:flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
