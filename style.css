@@ -394,13 +394,13 @@ body.dashboard-page {
   font-family:'Ibrands';
 }
 
-.Cortex {
+.cortex {
   position:absolute;
   bottom: 120px;
   left: 90px;
   font-size: 15px;
   color: #aaa;
-  font-family:'arial';
+  font-family:'Ibrands';
 }
 
 .message-box {
