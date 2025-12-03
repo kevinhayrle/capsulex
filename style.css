@@ -396,11 +396,11 @@ body.dashboard-page {
 
 .cortex {
   position:absolute;
-  bottom: 120px;
-  left: 90px;
+  bottom: 110px;
+  left: 0px;
   font-size: 15px;
   color: #aaa;
-  font-family:'Ibrands';
+  font-family:'arial';
 }
 
 .message-box {
