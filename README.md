@@ -4,7 +4,7 @@ This is the frontend repository of CapsuleX, built using HTML, CSS, and JavaScri
 
 # Features
 - Minimal, elegant UI with dark theme
-- Anonymous message sending via email or phone
+- Anonymous message sending via email
 - Responsive across devices
 - Splash screen transitions
 - User authentication (signup/login)
