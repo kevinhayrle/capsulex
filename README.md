@@ -21,7 +21,7 @@ git push
 
 # Developer
 **Kevin Antony**  
-*Full-stack Developer & Creator of CapsuleX*   
+*Full-stack Developer & System Architect of CapsuleX*   
 
 # License
 Frontend code © 2025 **Kevin Antony**  
